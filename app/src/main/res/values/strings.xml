@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">mushroom</string>
+    <string name="txtBaked">1.อบ</string>
+    <string name="txtPlant">2.เพาะเห็ด</string>
+    <string name="txtStatus">3.ดูสถานะ</string>
+    <string name="txtHistory">4.ดูย้อนหลัง</string>
 </resources>
