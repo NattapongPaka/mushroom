@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_dd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="วัน"
+            android:textAlignment="center"
+            android:textSize="@dimen/dimens_btn_main"
+            app:layout_constraintBottom_toTopOf="@+id/edt_dd"
+            app:layout_constraintEnd_toStartOf="@+id/txt_hh"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_hh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="ชม"
+            android:textAlignment="center"
+            android:textSize="@dimen/dimens_btn_main"
+            app:layout_constraintBottom_toTopOf="@+id/edt_hh"
+            app:layout_constraintEnd_toStartOf="@+id/txt_mm"
+            app:layout_constraintStart_toEndOf="@+id/txt_dd"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_mm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="นาที"
+            android:textAlignment="center"
+            android:textSize="@dimen/dimens_btn_main"
+            app:layout_constraintBottom_toTopOf="@+id/edt_mm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.76"
+            app:layout_constraintStart_toEndOf="@+id/txt_hh"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edt_dd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textSize="@dimen/dimens_btn_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/edt_hh"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_dd"
+            tools:text="DD" />
+
+        <EditText
+            android:id="@+id/edt_hh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textSize="@dimen/dimens_btn_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/edt_mm"
+            app:layout_constraintStart_toEndOf="@+id/edt_dd"
+            app:layout_constraintTop_toBottomOf="@+id/txt_hh"
+            tools:text="hh" />
+
+        <EditText
+            android:id="@+id/edt_mm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textSize="@dimen/dimens_btn_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/edt_hh"
+            app:layout_constraintTop_toBottomOf="@+id/txt_mm"
+            tools:text="mm" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text=":"
+            android:textSize="@dimen/dimens_btn_main"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_mm"
+            app:layout_constraintEnd_toStartOf="@+id/edt_mm"
+            app:layout_constraintStart_toEndOf="@+id/edt_hh"
+            app:layout_constraintTop_toTopOf="@+id/edt_mm" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text=":"
+            android:textSize="@dimen/dimens_btn_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/edt_hh"
+            app:layout_constraintStart_toEndOf="@+id/edt_dd"
+            app:layout_constraintTop_toTopOf="@+id/edt_hh" />
+
+
+
+
+    </android.support.constraint.ConstraintLayout>
+</merge>

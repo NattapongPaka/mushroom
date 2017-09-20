@@ -5,48 +5,69 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txt_hh"
+            android:id="@+id/txt_temp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="ชม"
+            android:text="อุหภูมิ"
             android:textAlignment="center"
             android:textSize="@dimen/dimens_btn_main"
-            app:layout_constraintBottom_toTopOf="@+id/edt_mm"
-            app:layout_constraintEnd_toStartOf="@+id/txt_mm"
+            app:layout_constraintBottom_toTopOf="@+id/edt_temp"
+            app:layout_constraintEnd_toStartOf="@+id/txt_humidity"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txt_mm"
+            android:id="@+id/txt_humidity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="นาที"
+            android:text="ความชื่น"
             android:textAlignment="center"
             android:textSize="@dimen/dimens_btn_main"
-            app:layout_constraintBottom_toTopOf="@+id/edt_hh"
+            app:layout_constraintBottom_toTopOf="@+id/edt_humidity"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txt_hh"
+            app:layout_constraintStart_toEndOf="@+id/txt_temp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/edt_hh"
+            android:id="@+id/edt_temp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textSize="@dimen/dimens_btn_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/edt_humidity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_temp"
+            tools:text="99" />
+
+        <EditText
+            android:id="@+id/edt_humidity"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
             android:ems="10"
             android:inputType="number"
             android:selectAllOnFocus="true"
@@ -55,29 +76,9 @@
             android:textSize="@dimen/dimens_btn_main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/edt_mm"
-            app:layout_constraintTop_toBottomOf="@+id/txt_mm"
-            tools:text="00" />
+            app:layout_constraintStart_toEndOf="@+id/edt_temp"
+            app:layout_constraintTop_toBottomOf="@+id/txt_humidity"
+            tools:text="99" />
 
-        <EditText
-            android:id="@+id/edt_mm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="number"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:textAlignment="center"
-            android:textSize="@dimen/dimens_btn_main"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/edt_hh"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_hh"
-            tools:text="00" />
     </android.support.constraint.ConstraintLayout>
-
 </merge>
