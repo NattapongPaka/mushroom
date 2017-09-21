@@ -1,5 +1,7 @@
 package app.cpe.mushroom;
 
+import android.view.View;
+
 import app.cpe.mushroom.base.BaseFragment;
 
 /**
@@ -12,4 +14,13 @@ public class FragmentPlant extends BaseFragment {
         super();
     }
 
+    @Override
+    public int setupLayout() {
+        return 0;
+    }
+
+    @Override
+    public void bindView(View view) {
+
+    }
 }

@@ -11,12 +11,20 @@ import android.view.ViewGroup;
  * Created by DEV on 20/9/2560.
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        int layoutResId = setupLayout();
+        if (layoutResId == 0) new RuntimeException("Null view");
+        return inflater.inflate(layoutResId, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        bindView(view);
     }
 
     @Override
@@ -24,23 +32,7 @@ public class BaseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+    public abstract int setupLayout();
 
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
+    public abstract void bindView(View view);
 }

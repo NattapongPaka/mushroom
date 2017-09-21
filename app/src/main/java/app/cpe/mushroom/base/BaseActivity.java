@@ -8,11 +8,20 @@ import android.support.v7.app.AppCompatActivity;
  * Created by DEV on 20/9/2560.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int layoutResId = setupLayout();
+        if(layoutResId == 0) {
+            new RuntimeException("Null layout");
+        }
+        setContentView(layoutResId);
+        setUpView();
+        if(savedInstanceState == null){
+            attachView();
+        }
     }
 
     @Override
@@ -39,4 +48,12 @@ public class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    public abstract int setupLayout();
+
+    public abstract void setUpView();
+
+    public abstract void attachView();
+
+    public abstract void detachView();
 }
