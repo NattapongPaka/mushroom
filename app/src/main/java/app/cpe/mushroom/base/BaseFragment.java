@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Unbinder;
+
 /**
  * Created by DEV on 20/9/2560.
  */
 
 public abstract class BaseFragment extends Fragment {
+
+    private Unbinder unbinder;
 
     @Nullable
     @Override
@@ -24,15 +28,18 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        bindView(view);
+        unbinder = bindView(view);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(unbinder != null){
+            unbinder.unbind();
+        }
     }
 
     public abstract int setupLayout();
 
-    public abstract void bindView(View view);
+    public abstract Unbinder bindView(View view);
 }

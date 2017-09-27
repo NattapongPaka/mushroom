@@ -1,5 +1,6 @@
 package app.cpe.mushroom;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.AndroidException;
@@ -12,11 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Space;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.logging.Logger;
 
 import app.cpe.mushroom.base.BaseFragment;
 import app.cpe.mushroom.manager.HttpManager;
+import app.cpe.mushroom.utils.LogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,32 +37,23 @@ public class FragmentBaked extends BaseFragment {
 
     public static final String TAG = FragmentBaked.class.getSimpleName();
 
-    @BindView(R.id.txt_hh)
-    TextView txtHh;
-    @BindView(R.id.txt_mm)
-    TextView txtMm;
     @BindView(R.id.edt_hh)
     EditText edtHh;
     @BindView(R.id.edt_mm)
     EditText edtMm;
-    @BindView(R.id.space)
-    Space space;
-    @BindView(R.id.txt_temp)
-    TextView txtTemp;
-    @BindView(R.id.txt_humidity)
-    TextView txtHumidity;
     @BindView(R.id.edt_temp)
     EditText edtTemp;
     @BindView(R.id.edt_humidity)
     EditText edtHumidity;
-    @BindView(R.id.textView6)
-    TextView textView6;
     @BindView(R.id.btn_start)
     Button btnStart;
 
-    Unbinder unbinder;
-
     MainActivity mainActivity;
+
+    private String temp = "0";
+    private String humidity = "0";
+    private String hh = "0";
+    private String mm = "0";
 
     public static FragmentBaked newInstance() {
         return new FragmentBaked();
@@ -71,26 +65,35 @@ public class FragmentBaked extends BaseFragment {
     }
 
     @Override
-    public void bindView(View view) {
-        unbinder = ButterKnife.bind(this, view);
+    public Unbinder bindView(View view) {
+        return ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            mainActivity = (MainActivity) context;
+        }
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mainActivity = (MainActivity) getActivity();
         mainActivity.setUpToolBar(TAG, true);
+        initView();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    private void initView() {
+        edtTemp.setText(temp);
+        edtHumidity.setText(humidity);
+        edtHh.setText(hh);
+        edtMm.setText(mm);
     }
 
     @OnClick(R.id.btn_start)
     public void setBtnStartOnClick() {
-        HttpManager.getInstatance().getService().addTemp("111", "222")
+        HttpManager.getInstatance().getService().addBaked(temp, humidity, hh, mm)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -106,7 +109,7 @@ public class FragmentBaked extends BaseFragment {
 
                     @Override
                     public void onNext(String s) {
-                        Log.d(TAG, s);
+                        Toast.makeText(getContext(), "Result : " + s, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

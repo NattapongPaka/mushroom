@@ -31,8 +31,6 @@ public class FragmentMain extends BaseFragment {
     @BindView(R.id.btnHistory)
     Button btnHistory;
 
-    Unbinder unbinder;
-
     MainActivity mainActivity;
 
     public static FragmentMain newInstance() {
@@ -45,8 +43,8 @@ public class FragmentMain extends BaseFragment {
     }
 
     @Override
-    public void bindView(View view) {
-        unbinder = ButterKnife.bind(this, view);
+    public Unbinder bindView(View view) {
+        return ButterKnife.bind(this, view);
     }
 
     @Override
@@ -56,12 +54,6 @@ public class FragmentMain extends BaseFragment {
         mainActivity.setUpToolBar(TAG,false);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
     @OnClick(R.id.btnBaked)
     public void setOnClickBtnBaked() {
         mainActivity.switchFragment(FragmentBaked.newInstance(),FragmentBaked.TAG);
@@ -69,7 +61,7 @@ public class FragmentMain extends BaseFragment {
 
     @OnClick(R.id.btnPlant)
     public void setOnClickBtnPlant() {
-
+        mainActivity.switchFragment(FragmentPlant.newInstance(),FragmentPlant.TAG);
     }
 
     @OnClick(R.id.btnStatus)

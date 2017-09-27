@@ -1,5 +1,8 @@
 package app.cpe.mushroom.manager;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 
 
@@ -32,15 +35,17 @@ public class HttpManager {
     private Retrofit retrofit;
 
     private HttpManager() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(Config.url + "/")
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())     //Converter to gson
+                .addConverterFactory(GsonConverterFactory.create(gson))     //Converter to gson
                 .addConverterFactory(new ToStringConverterFactory())    //Converter to string
                 .client(customClient())
                 .build();
-
         service = retrofit.create(ApiService.class);
     }
 
