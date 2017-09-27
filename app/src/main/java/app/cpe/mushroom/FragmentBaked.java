@@ -3,29 +3,19 @@ package app.cpe.mushroom;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.AndroidException;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.logging.Logger;
-
 import app.cpe.mushroom.base.BaseFragment;
 import app.cpe.mushroom.manager.HttpManager;
-import app.cpe.mushroom.utils.LogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import rx.Observer;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -33,9 +23,12 @@ import rx.schedulers.Schedulers;
  * Created by DEV on 20/9/2560.
  */
 
-public class FragmentBaked extends BaseFragment {
+public class FragmentBaked extends BaseFragment  {
 
     public static final String TAG = FragmentBaked.class.getSimpleName();
+
+    @BindView(R.id.txt_hh)
+    TextView txt_hh;
 
     @BindView(R.id.edt_hh)
     EditText edtHh;
@@ -89,6 +82,14 @@ public class FragmentBaked extends BaseFragment {
         edtHumidity.setText(humidity);
         edtHh.setText(hh);
         edtMm.setText(mm);
+
+        //edtTemp.setFocusable(false);
+        //edtHumidity.setFocusable(false);
+        //edtHh.setFocusable(false);
+        //edtMm.setFocusable(false);
+
+        //edtHh.setOnClickListener(getTimeOnClick());
+        //edtMm.setOnClickListener(getTimeOnClick());
     }
 
     @OnClick(R.id.btn_start)
