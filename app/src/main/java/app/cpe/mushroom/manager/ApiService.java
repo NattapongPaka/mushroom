@@ -1,5 +1,9 @@
 package app.cpe.mushroom.manager;
 
+import java.util.List;
+
+import app.cpe.mushroom.data.dao.BakedDao;
+import app.cpe.mushroom.data.dao.PlantDao;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -26,5 +30,11 @@ public interface ApiService {
                                 @Query("p_dd") String p_dd,
                                 @Query("p_hh") String p_hh,
                                 @Query("p_mm") String p_mm);
+
+    @GET("json/plant_log.php")
+    Observable<List<PlantDao>> getPlantLog();
+
+    @GET("json/baked_log.php")
+    Observable<List<BakedDao>> getBakedLog();
 
 }

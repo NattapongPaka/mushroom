@@ -1,4 +1,4 @@
-package app.cpe.mushroom;
+package app.cpe.mushroom.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,8 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import app.cpe.mushroom.R;
 import app.cpe.mushroom.base.BaseFragment;
 import app.cpe.mushroom.manager.HttpManager;
+import app.cpe.mushroom.ui.activity.MainActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -54,7 +56,7 @@ public class FragmentBaked extends BaseFragment  {
 
     @Override
     public int setupLayout() {
-        return R.layout.layout_baked;
+        return R.layout.fragment_baked;
     }
 
     @Override

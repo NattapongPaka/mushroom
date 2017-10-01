@@ -4,4 +4,6 @@
     <string name="txtPlant">2.เพาะเห็ด</string>
     <string name="txtStatus">3.ดูสถานะ</string>
     <string name="txtHistory">4.ดูย้อนหลัง</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
 </resources>

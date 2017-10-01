@@ -1,13 +1,15 @@
-package app.cpe.mushroom;
+package app.cpe.mushroom.ui.activity;
 
 
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import app.cpe.mushroom.ui.fragment.FragmentMain;
+import app.cpe.mushroom.R;
 import app.cpe.mushroom.base.BaseActivity;
+import app.cpe.mushroom.utils.LogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -17,17 +19,16 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    Unbinder unbinder;
-
     @Override
     public int setupLayout() {
-        return R.layout.main;
+        return R.layout.activity_main;
     }
 
     @Override
-    public void setUpView() {
-        unbinder = ButterKnife.bind(this);
+    public Unbinder setUpView() {
+        Unbinder unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        return unbinder;
     }
 
     @Override
@@ -40,14 +41,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public void detachView() {
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (unbinder != null) {
-            unbinder.unbind();
-        }
     }
 
     @Override

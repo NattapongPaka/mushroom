@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import butterknife.Unbinder;
+
 /**
  * Created by DEV on 20/9/2560.
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,40 +22,23 @@ public abstract class BaseActivity extends AppCompatActivity {
             new RuntimeException("Null layout");
         }
         setContentView(layoutResId);
-        setUpView();
+        unbinder = setUpView();
         if(savedInstanceState == null){
             attachView();
         }
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(unbinder != null){
+            unbinder.unbind();
+        }
     }
 
     public abstract int setupLayout();
 
-    public abstract void setUpView();
+    public abstract Unbinder setUpView();
 
     public abstract void attachView();
 

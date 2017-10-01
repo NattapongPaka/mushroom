@@ -1,26 +1,23 @@
-package app.cpe.mushroom;
+package app.cpe.mushroom.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import app.cpe.mushroom.R;
 import app.cpe.mushroom.base.BaseFragment;
 import app.cpe.mushroom.manager.HttpManager;
+import app.cpe.mushroom.ui.activity.MainActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import retrofit2.http.Query;
-import rx.Observable;
 import rx.Observer;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -73,7 +70,7 @@ public class FragmentPlant extends BaseFragment {
 
     @Override
     public int setupLayout() {
-        return R.layout.layout_plant;
+        return R.layout.fragment_plant;
     }
 
     @Override

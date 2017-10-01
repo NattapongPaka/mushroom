@@ -22,13 +22,9 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int layoutResId = setupLayout();
         if (layoutResId == 0) new RuntimeException("Null view");
-        return inflater.inflate(layoutResId, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        View view = inflater.inflate(layoutResId, container, false);
         unbinder = bindView(view);
+        return view;
     }
 
     @Override
