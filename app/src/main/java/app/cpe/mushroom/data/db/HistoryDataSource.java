@@ -19,7 +19,6 @@ public class HistoryDataSource extends BaseDataSource {
         super(db);
     }
 
-
     public long addPlant(List<PlantDao> plantDaos) {
         openTransaction();
         long result = -1;

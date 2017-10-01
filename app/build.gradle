@@ -83,6 +83,11 @@ dependencies {
 
     implementation 'com.orhanobut:logger:2.1.1'
 
+    //Logger
+    debugImplementation "com.facebook.stetho:stetho:${stethoVersion}"
+    debugImplementation "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
+
+    implementation 'com.jjoe64:graphview:4.2.1'
 
 
 }

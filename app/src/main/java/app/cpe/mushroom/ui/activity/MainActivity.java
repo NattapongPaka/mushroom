@@ -6,10 +6,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import app.cpe.mushroom.ui.fragment.FragmentMain;
 import app.cpe.mushroom.R;
 import app.cpe.mushroom.base.BaseActivity;
-import app.cpe.mushroom.utils.LogUtil;
+import app.cpe.mushroom.ui.fragment.FragmentMain;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -50,8 +49,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            switchFragment(FragmentMain.newInstance(),FragmentMain.TAG);
+        if (item.getItemId() == android.R.id.home) {
+            switchFragment(FragmentMain.newInstance(), FragmentMain.TAG);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -32,4 +32,8 @@ public class Db {
     public void closeDbHelper(){
         historyDataSource.close();
     }
+
+    public HistoryDataSource getHistoryDataSource() {
+        return historyDataSource;
+    }
 }

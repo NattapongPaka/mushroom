@@ -49,9 +49,7 @@ public class FragmentStatus extends BaseFragment {
 
     @Override
     public Unbinder bindView(View view) {
-        Unbinder unbinder = ButterKnife.bind(this, view);
-
-        return unbinder;
+        return ButterKnife.bind(this, view);
     }
 
     @Override
@@ -71,25 +69,10 @@ public class FragmentStatus extends BaseFragment {
 
     private void setupView() {
         tab.setupWithViewPager(viewPager);
-
-        String[] titles = new String[]{"Trip plan", "Check-in"};
+        String[] titles = new String[]{getString(R.string.tabBaked),getString(R.string.tabPlant)};
         fragmentStatePagerAdapter = new FragmentPagerAdapter(getChildFragmentManager(), titles);
         viewPager.setAdapter(fragmentStatePagerAdapter);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setCurrentItem(0);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }

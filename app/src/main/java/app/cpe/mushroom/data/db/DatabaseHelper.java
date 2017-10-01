@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_BAKED_CREATE = "CREATE TABLE IF NOT EXISTS "
             + Baked.TABLE
             + "( "
-            + Baked.ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + Baked.ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + Baked.TEMP_LOG + " TEXT,"
             + Baked.HUM_LOG + " TEXT,"
             + Baked.TIME_STAMP + " TEXT"
@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_PLANT_CREATE = "CREATE TABLE IF NOT EXISTS "
             + Plant.TABLE
             + "( "
-            + Plant.ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + Plant.ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + Plant.TEMP_LOG + " TEXT,"
             + Plant.HUM_LOG + " TEXT,"
             + Plant.TIME_STAMP + " TEXT"
@@ -38,11 +38,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    @Override
-    public void onConfigure(SQLiteDatabase db) {
-        super.onConfigure(db);
     }
 
     @Override
