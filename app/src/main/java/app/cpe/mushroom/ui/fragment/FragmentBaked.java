@@ -25,13 +25,12 @@ import rx.schedulers.Schedulers;
  * Created by DEV on 20/9/2560.
  */
 
-public class FragmentBaked extends BaseFragment  {
+public class FragmentBaked extends BaseFragment {
 
     public static final String TAG = FragmentBaked.class.getSimpleName();
 
     @BindView(R.id.txt_hh)
     TextView txt_hh;
-
     @BindView(R.id.edt_hh)
     EditText edtHh;
     @BindView(R.id.edt_mm)
@@ -84,19 +83,17 @@ public class FragmentBaked extends BaseFragment  {
         edtHumidity.setText(humidity);
         edtHh.setText(hh);
         edtMm.setText(mm);
-
-        //edtTemp.setFocusable(false);
-        //edtHumidity.setFocusable(false);
-        //edtHh.setFocusable(false);
-        //edtMm.setFocusable(false);
-
-        //edtHh.setOnClickListener(getTimeOnClick());
-        //edtMm.setOnClickListener(getTimeOnClick());
     }
 
     @OnClick(R.id.btn_start)
     public void setBtnStartOnClick() {
+        temp = edtTemp.getText().toString();
+        humidity = edtHumidity.getText().toString();
+        hh = edtHh.getText().toString();
+        mm = edtMm.getText().toString();
         HttpManager.getInstatance().getService().addBaked(temp, humidity, hh, mm)
+                .doOnSubscribe(() -> showProgressDialog())
+                .doOnCompleted(() -> dismissProgressDialog())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -112,7 +109,7 @@ public class FragmentBaked extends BaseFragment  {
 
                     @Override
                     public void onNext(String s) {
-                        Toast.makeText(getContext(), "Result : " + s, Toast.LENGTH_SHORT).show();
+                        showToast("Set baked " + s);
                     }
                 });
     }

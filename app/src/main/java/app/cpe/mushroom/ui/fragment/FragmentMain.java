@@ -1,5 +1,6 @@
 package app.cpe.mushroom.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,17 +10,24 @@ import java.util.List;
 
 import app.cpe.mushroom.R;
 import app.cpe.mushroom.base.BaseFragment;
+import app.cpe.mushroom.data.Constance;
 import app.cpe.mushroom.data.dao.BakedDao;
 import app.cpe.mushroom.data.dao.PlantDao;
 import app.cpe.mushroom.data.db.Db;
 import app.cpe.mushroom.manager.HttpManager;
 import app.cpe.mushroom.ui.activity.MainActivity;
+import app.cpe.mushroom.ui.widget.CustomProgressDialog;
 import app.cpe.mushroom.utils.LogUtil;
+import app.cpe.mushroom.utils.PreferenceUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import rx.Notification;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -57,57 +65,63 @@ public class FragmentMain extends BaseFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            mainActivity = (MainActivity) context;
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mainActivity = (MainActivity) getActivity();
-        mainActivity.setUpToolBar(TAG,false);
-        getAllLogFromServer();
+        mainActivity.setUpToolBar(TAG, false);
+        Boolean isAllData = (Boolean) PreferenceUtil.getInstance().getValue(Constance.IS_ALL_DATA);
+        if (isAllData == null || !isAllData) {
+            getAllLogFromServer();
+        }
     }
 
     @OnClick(R.id.btnBaked)
     public void setOnClickBtnBaked() {
-        mainActivity.switchFragment(FragmentBaked.newInstance(),FragmentBaked.TAG);
+        mainActivity.switchFragment(FragmentBaked.newInstance(), FragmentBaked.TAG);
     }
 
     @OnClick(R.id.btnPlant)
     public void setOnClickBtnPlant() {
-        mainActivity.switchFragment(FragmentPlant.newInstance(),FragmentPlant.TAG);
+        mainActivity.switchFragment(FragmentPlant.newInstance(), FragmentPlant.TAG);
     }
 
     @OnClick(R.id.btnStatus)
     public void setOnClickBtnStatus() {
-        mainActivity.switchFragment(FragmentStatus.newInstance(),FragmentStatus.TAG);
+        mainActivity.switchFragment(FragmentStatus.newInstance(), FragmentStatus.TAG);
     }
 
     @OnClick(R.id.btnHistory)
     public void setOnClickBtnHistory() {
-        mainActivity.switchFragment(FragmentHistory.newInstance(),FragmentHistory.TAG);
+        mainActivity.switchFragment(FragmentHistory.newInstance(), FragmentHistory.TAG);
     }
 
     private void getAllLogFromServer() {
         Observable<Long> call1 = HttpManager.getInstatance().getService().getBakedLog().subscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
-                .flatMap(new Func1<List<BakedDao>, Observable<Long>>() {
-                    @Override
-                    public Observable<Long> call(List<BakedDao> bakedDaos) {
-                        return Observable.fromCallable(() -> Db.getInstance().getHistoryDataSource().addBaked(bakedDaos));
-                    }
-                });
+                .flatMap(bakedDaos -> Observable.fromCallable(() -> Db.getInstance().getHistoryDataSource().addBaked(bakedDaos)));
 
         Observable<Long> call2 = HttpManager.getInstatance().getService().getPlantLog().subscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
-                .flatMap(new Func1<List<PlantDao>, Observable<Long>>() {
-                    @Override
-                    public Observable<Long> call(List<PlantDao> plantDaos) {
-                        return Observable.fromCallable(() -> Db.getInstance().getHistoryDataSource().addPlant(plantDaos));
-                    }
-                });
+                .flatMap(plantDaos -> Observable.fromCallable(() -> Db.getInstance().getHistoryDataSource().addPlant(plantDaos)));
 
         Observable.concat(call1, call2).last()
+                .doOnSubscribe(() -> showProgressDialog())
+                .doOnCompleted(() -> dismissProgressDialog())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        aLong -> LogUtil.D("Add baked plant success %d", aLong),
-                        e -> e.printStackTrace()
+                        result -> {
+                            showToast("Load data complete");
+                            PreferenceUtil.getInstance().setSharedPreference(Constance.IS_ALL_DATA, true);
+                            LogUtil.D("Last result %d", result.longValue());
+                        },
+                        t -> t.printStackTrace()
                 );
-
     }
 }

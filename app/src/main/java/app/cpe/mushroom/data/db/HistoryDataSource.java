@@ -52,6 +52,7 @@ public class HistoryDataSource extends BaseDataSource {
                 values.put(Baked.TIME_STAMP, bakedDao.getTimeStamp());
                 result = database.insertOrThrow(Baked.TABLE, null, values);
             }
+            transactionSuccess();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

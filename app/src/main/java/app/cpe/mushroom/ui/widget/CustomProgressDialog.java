@@ -22,6 +22,7 @@ import butterknife.Unbinder;
 public class CustomProgressDialog extends BaseDialog {
 
     public static final String TAG = CustomProgressDialog.class.getSimpleName();
+
     @BindView(R.id.progress)
     ProgressBar progress;
 
@@ -71,11 +72,5 @@ public class CustomProgressDialog extends BaseDialog {
         if (unbinder != null) {
             unbinder.unbind();
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder1.unbind();
     }
 }

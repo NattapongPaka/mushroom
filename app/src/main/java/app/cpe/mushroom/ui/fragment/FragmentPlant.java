@@ -103,7 +103,14 @@ public class FragmentPlant extends BaseFragment {
 
     @OnClick(R.id.btn_start)
     public void setBtnStartOnClick() {
+        p_temp = edtTemp.getText().toString();
+        p_hum = edtHumidity.getText().toString();
+        p_dd = edtDd.getText().toString();
+        p_hh = edtHh.getText().toString();
+        p_mm = edtMm.getText().toString();
         HttpManager.getInstatance().getService().addPlant(p_temp, p_hum, p_dd, p_hh, p_mm)
+                .doOnSubscribe(()->showProgressDialog())
+                .doOnCompleted(()->dismissProgressDialog())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -119,7 +126,7 @@ public class FragmentPlant extends BaseFragment {
 
                     @Override
                     public void onNext(String s) {
-                        Toast.makeText(getContext(), "Result : " + s, Toast.LENGTH_SHORT).show();
+                        showToast("Set plant " + s);
                     }
                 });
     }
