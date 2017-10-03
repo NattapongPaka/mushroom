@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.util.Calendar;
+
+import app.cpe.mushroom.ui.activity.MainActivity;
 import app.cpe.mushroom.ui.widget.CustomProgressDialog;
 import butterknife.Unbinder;
 
@@ -48,6 +53,17 @@ public abstract class BaseFragment extends Fragment {
             CustomProgressDialog customProgressDialog = (CustomProgressDialog) fragment;
             customProgressDialog.dismissAllowingStateLoss();
         }
+    }
+
+    protected void showDatePicker(DatePickerDialog.OnDateSetListener callBack) {
+        Calendar now = Calendar.getInstance();
+        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                callBack,
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+        );
+        dpd.show(getFragmentManager(), DatePickerDialog.class.getSimpleName());
     }
 
     protected void showToast(String msg) {

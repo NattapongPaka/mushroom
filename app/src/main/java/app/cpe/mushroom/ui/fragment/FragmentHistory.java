@@ -11,10 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.jjoe64.graphview.GraphView;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.util.Locale;
 
 import app.cpe.mushroom.R;
 import app.cpe.mushroom.base.BaseFragment;
 import app.cpe.mushroom.ui.activity.MainActivity;
+import app.cpe.mushroom.utils.LogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -68,5 +72,35 @@ public class FragmentHistory extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mainActivity.setUpToolBar(TAG, true);
+        initView();
+    }
+
+    private void initView() {
+        edtStartDate.setFocusable(false);
+        edtEndDate.setFocusable(false);
+
+        edtStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePicker(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        edtStartDate.setText(String.format(Locale.getDefault(), "%d-%02d-%02d", year, monthOfYear, dayOfMonth));
+                    }
+                });
+            }
+        });
+
+        edtEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePicker(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        edtEndDate.setText(String.format(Locale.getDefault(), "%d-%02d-%02d", year, monthOfYear, dayOfMonth));
+                    }
+                });
+            }
+        });
     }
 }

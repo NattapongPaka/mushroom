@@ -69,7 +69,7 @@ public class FragmentStatus extends BaseFragment {
 
     private void setupView() {
         tab.setupWithViewPager(viewPager);
-        String[] titles = new String[]{getString(R.string.tabBaked),getString(R.string.tabPlant)};
+        String[] titles = new String[]{getString(R.string.tabBaked), getString(R.string.tabPlant)};
         fragmentStatePagerAdapter = new FragmentPagerAdapter(getChildFragmentManager(), titles);
         viewPager.setAdapter(fragmentStatePagerAdapter);
         viewPager.setOffscreenPageLimit(2);
